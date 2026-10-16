@@ -1,0 +1,29 @@
+// Safety invariants. Each one is proved or refuted against a rule library.
+// "never when C"  : the rule must not fire on any patient for whom C is true.
+// "requires C"    : whenever the rule fires, C must be true (a missing value makes C null, which fails).
+// Sources are examples for demonstration; verify them before relying on any invariant.
+
+invariant "metformin-contraindicated-below-egfr-30"
+  rule "Recommend metformin"
+  never when Latest("egfr") < 30 'mL/min/1.73m2'
+  source "Metformin product labelling: contraindicated at eGFR below 30 (verify current label)"
+
+invariant "metformin-needs-a-measured-egfr"
+  rule "Recommend metformin"
+  requires Latest("egfr") is not null
+  source "Safety expectation: do not recommend without a kidney function result"
+
+invariant "nsaid-not-with-reduced-egfr"
+  rule "Recommend NSAID"
+  never when Latest("egfr") < 30 'mL/min/1.73m2'
+  source "Common NSAID renal precaution (verify against local policy)"
+
+invariant "nsaid-needs-a-measured-egfr"
+  rule "Recommend NSAID"
+  requires Latest("egfr") is not null
+  source "Safety expectation: do not recommend without a kidney function result"
+
+invariant "antihypertensive-never-for-normal-bp"
+  rule "Start antihypertensive"
+  never when Latest("sbp") < 120 'mmHg' and Latest("dbp") < 80 'mmHg'
+  source "Illustrative: no drug-treatment initiation for clearly normal pressure"
