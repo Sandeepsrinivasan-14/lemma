@@ -3825,5 +3825,177 @@
     "seconds": 10.9
    }
   }
+ },
+ "e10": {
+  "available": true,
+  "libraries": 207,
+  "translated": 207,
+  "evaluations": 235518,
+  "mismatches": 26,
+  "translation_failures": [],
+  "mismatch_examples": [
+   {
+    "library": "aki_alert",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.2(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.2,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M003",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.21(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.21,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M004",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.19(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.19,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M005",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.23(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.23,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M006",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.17(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.17,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M008",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.2(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.2,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M009",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.2(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.2,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M010",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.2(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.2,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   }
+  ],
+  "translator": "@cqframework/cql 5.4.0",
+  "engine": "cql-execution 3.3.2"
  }
 }

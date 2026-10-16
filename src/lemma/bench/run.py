@@ -149,6 +149,36 @@ def run_e7(schema: Schema, rules_dir: Path, log=print, limit: int = 150) -> dict
     return {"synthetic": True, "tolerances": {c: {"unit": s.unit, "tolerance": float(s.tolerance)} for c, s in schema.obs.items()}, "rules": out}
 
 
+def run_e10(schema: Schema, rules_dir: Path, log=print) -> dict:
+    """Lemma interpreter vs the official HL7 CQL translator + cql-execution engine (needs Node)."""
+    from ..analyses.official import available, compare_with_official
+
+    if not available():
+        return {"available": False, "note": "Node.js and `npm install` in tools/official are required"}
+    pts = generate_cohort(schema, 150, seed=1010) + random_patients(schema, 150, seed=1011)
+    tot = {"libraries": 0, "translated": 0, "evaluations": 0, "mismatches": 0}
+    failures, mism_examples, engine = [], [], {}
+    for name, rule in GOLD:
+        text = (rules_dir / f"{name}.cql").read_text()
+        gold = load_library(text, schema, is_text=True)
+        libs = [(name, gold)] + [(f"{name}/{m.id}", m.lib) for m in generate_mutants(schema, text)]
+        for label, lib in libs:
+            r = compare_with_official(schema, lib, pts)
+            tot["libraries"] += 1
+            if not r["translated"]:
+                failures.append({"library": label, "errors": r["translator_errors"][:2]})
+                continue
+            engine = {"translator": r["translator"], "engine": r["engine"]}
+            tot["translated"] += 1
+            tot["evaluations"] += r["evaluations"]
+            tot["mismatches"] += len(r["mismatches"])
+            for m in r["mismatches"][:1]:
+                if len(mism_examples) < 8:
+                    mism_examples.append({"library": label, "define": m["define"], "lemma": m["lemma"], "official": m["official"], "patient": m["patient"]})
+        log(f"[E10] {name}: running total {tot}")
+    return {"available": True, **tot, "translation_failures": failures, "mismatch_examples": mism_examples, **engine}
+
+
 def render_markdown(res: dict) -> str:
     e1, e2 = res["e1"], res["e2"]
     s = e2["summary"]
@@ -172,6 +202,23 @@ def render_markdown(res: dict) -> str:
         L.append(f"- Boundary tests generated from v1: {e3['boundary_tests_from_v1']}; failing on v2: **{e3['boundary_tests_failing_on_v2']}**")
         im = e3["impact"]
         L.append(f"- Synthetic cohort (n={e3['cohort']['n']}): fires under v1 {im['a_fires']['rate']:.1%}, under v2 {im['b_fires']['rate']:.1%}; gained {im['gained']['rate']:.1%}, lost {im['lost']['rate']:.1%}")
+    if "e10" in res:
+        e = res["e10"]
+        L += ["", "## E10 - Lemma interpreter vs the official HL7 CQL toolchain", ""]
+        if not e.get("available"):
+            L.append(f"Not run: {e.get('note')}")
+        else:
+            L += [
+                f"Lemma rules were exported to real CQL, compiled by the official translator ({e.get('translator')}) and run by the {e.get('engine')} engine, on the same patients as Lemma's interpreter.",
+                "",
+                f"- Libraries (gold + mutants): **{e['libraries']}**, translated without errors: **{e['translated']}**",
+                f"- Definition evaluations compared (true/false/null): **{e['evaluations']:,}**",
+                f"- Disagreements: **{e['mismatches']}**",
+            ]
+            if e["mismatch_examples"]:
+                L += ["", "Examples (every one inspected is a boundary case where the JS engine's floating-point Decimal arithmetic differs from Lemma's exact rationals, e.g. 1.2 - 0.9 evaluates to 0.29999... in JS):", ""]
+                for m in e["mismatch_examples"]:
+                    L.append(f"- `{m['library']}` / {m['define']}: Lemma {m['lemma']}, official {m['official']}")
     if "e7" in res:
         L += ["", "## E7 - threshold robustness (synthetic cohort)", "", "| Rule library | Patients | Fragile (flips within tolerance) | Share |", "| --- | --- | --- | --- |"]
         for name, r in res["e7"]["rules"].items():
@@ -194,6 +241,7 @@ def run_all(schema_path: str | Path, rules_dir: str | Path, out_dir: str | Path,
     res = run_e1_e2(schema, rules_dir, log)
     res.update(run_e3_e8(schema, rules_dir, log))
     res["e7"] = run_e7(schema, rules_dir, log)
+    res["e10"] = run_e10(schema, rules_dir, log)
     (out_dir / "lemmabench.json").write_text(json.dumps(res, indent=1, default=str))
     (out_dir / "RESULTS.md").write_text(render_markdown(res))
     return res

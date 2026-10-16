@@ -44,6 +44,25 @@ Equivalent mutants (edits that change no behaviour) are proved equivalent by Lem
 - Boundary tests generated from v1: 15; failing on v2: **0**
 - Synthetic cohort (n=5000): fires under v1 10.7%, under v2 18.5%; gained 7.9%, lost 0.0%
 
+## E10 - Lemma interpreter vs the official HL7 CQL toolchain
+
+Lemma rules were exported to real CQL, compiled by the official translator (@cqframework/cql 5.4.0) and run by the cql-execution 3.3.2 engine, on the same patients as Lemma's interpreter.
+
+- Libraries (gold + mutants): **207**, translated without errors: **207**
+- Definition evaluations compared (true/false/null): **235,518**
+- Disagreements: **26**
+
+Examples (every one inspected is a boundary case where the JS engine's floating-point Decimal arithmetic differs from Lemma's exact rationals, e.g. 1.2 - 0.9 evaluates to 0.29999... in JS):
+
+- `aki_alert` / Rise of 0.3 mg/dL within 48 hours: Lemma true, official false
+- `aki_alert/M003` / Rise of 0.3 mg/dL within 48 hours: Lemma true, official false
+- `aki_alert/M004` / Rise of 0.3 mg/dL within 48 hours: Lemma true, official false
+- `aki_alert/M005` / Rise of 0.3 mg/dL within 48 hours: Lemma true, official false
+- `aki_alert/M006` / Rise of 0.3 mg/dL within 48 hours: Lemma true, official false
+- `aki_alert/M008` / Rise of 0.3 mg/dL within 48 hours: Lemma true, official false
+- `aki_alert/M009` / Rise of 0.3 mg/dL within 48 hours: Lemma true, official false
+- `aki_alert/M010` / Rise of 0.3 mg/dL within 48 hours: Lemma true, official false
+
 ## E7 - threshold robustness (synthetic cohort)
 
 | Rule library | Patients | Fragile (flips within tolerance) | Share |

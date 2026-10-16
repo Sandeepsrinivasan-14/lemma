@@ -57,11 +57,18 @@ The old version was *undecided* for this patient (diastolic pressure missing) wh
 
 Other results: encoding vs interpreter agreed on 122,268 evaluations across 207 libraries (0 mismatches); median diff well under a second.
 
+### Checked against the official HL7 CQL toolchain (E10)
+
+`lemma official <rules>` exports Lemma rules to real CQL, compiles them with the official translator (`@cqframework/cql` 5.4.0) and runs them in the `cql-execution` 3.3.2 engine on the same patients as Lemma's interpreter (Node.js needed: `npm install --prefix tools/official`).
+
+- 207 libraries (6 gold + 201 mutants): **all 207 compile** with the official translator.
+- 235,518 true/false/null definition results compared: **26 disagreements**, all in `aki_alert` and its mutants, all at an exact boundary: the JS engine computes `1.2 - 0.9` as 0.2999999999999999 (IEEE floats), so "rise of 0.3" is false there, while Lemma's exact rationals say true. Three-valued logic (missing data) agreed everywhere. I have not run the Java engine, which uses `BigDecimal` and likely matches Lemma; treat that as untested.
+
 **Read these honestly.** Mutants come from my own operators, so rates describe this benchmark. Lemma "finds 100%" partly because it is exact within its model; the interesting numbers are how far the cheaper baselines fall short and that equivalent edits are *proved* harmless. Cohorts are synthetic.
 
 ## Limits (please read)
 
-- **Not the official CQL.** This is a CQL-*like* subset with its own implementation. It has not been checked against the HL7 CQL engine or translator, and CQL libraries from the wild will mostly not parse.
+- **A CQL-*like* subset, not full CQL.** It has its own parser and checker, so CQL libraries from the wild will mostly not parse. Within the subset, Lemma rules *are* checked against the official toolchain (see "Checked against the official HL7 CQL toolchain" above): they export to real CQL that the official translator accepts. The comparison uses a parameter-based export, not the FHIR data model.
 - **Bounded domain.** Proofs hold for patients on the schema's measurement grid and plausible ranges, with at most one prior value per trend observation. Anything outside that model is outside the guarantee.
 - **Example rules are illustrations**, simplified from the shape of public guidelines. They are not clinical guidance, and the invariant sources are placeholders to verify.
 - **Synthetic cohort.** The bundled generator is not validated against real populations. Impact and equity numbers on it describe the generator. Use `--cohort file.csv` to plug in your own data; equity output is descriptive, not a fairness conclusion.

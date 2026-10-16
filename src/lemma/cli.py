@@ -225,6 +225,30 @@ def cmd_crosscheck(args) -> int:
     return 1 if res["mismatches"] else 0
 
 
+def cmd_official(args) -> int:
+    from .analyses.official import OfficialUnavailable, compare_with_official
+
+    schema = _schema(args)
+    cohort = generate_cohort(schema, args.n, args.seed)
+    rc = 0
+    for path in args.rules:
+        lib = load_library(path, schema)
+        try:
+            r = compare_with_official(schema, lib, cohort)
+        except OfficialUnavailable as e:
+            print(f"error: {e}\n(run `npm install` in tools/official; needs Node.js)", file=sys.stderr)
+            return 2
+        if not r["translated"]:
+            print(f"{path}: the official translator rejected the exported CQL: {r['translator_errors'][:2]}")
+            rc = 1
+            continue
+        print(f"{path}: {r['evaluations']} evaluations vs {r['translator']} + {r['engine']}: {len(r['mismatches'])} disagreement(s)")
+        for m in r["mismatches"][:5]:
+            print(f"  {m['define']}: lemma={m['lemma']} official={m['official']}  patient={json.dumps(m['patient']['observations'])}")
+        rc = rc or (1 if r["mismatches"] else 0)
+    return rc
+
+
 def cmd_bench(args) -> int:
     from .bench.run import run_all
 
@@ -306,6 +330,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     sp = add("crosscheck", cmd_crosscheck, "SMT encoding vs interpreter on a cohort")
     sp.add_argument("rules")
+    sp.add_argument("-n", type=int, default=200)
+    sp.add_argument("--seed", type=int, default=7)
+
+    sp = add("official", cmd_official, "compare against the official HL7 CQL translator and engine (needs Node)")
+    sp.add_argument("rules", nargs="+")
     sp.add_argument("-n", type=int, default=200)
     sp.add_argument("--seed", type=int, default=7)
 
