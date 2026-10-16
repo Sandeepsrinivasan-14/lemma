@@ -1,0 +1,104 @@
+# Data contract for the cardio-renal demo rules.
+#
+# Everything here is a modelling assumption for a research prototype:
+#   * min/max   - the plausible range the solver searches (witness patients stay inside it)
+#   * step      - measurement precision; observation values live on this grid
+#   * typical   - an "ordinary" value; witnesses are pulled towards it so they look realistic
+#   * tolerance - measurement tolerance used by the robustness analysis (canonical unit)
+#   * conversions - factors that turn another unit into the canonical unit
+# Codes (LOINC / SNOMED CT / RxNorm) are illustrative; verify them before any real use.
+
+[meta]
+name = "cardio-renal-demo"
+
+[demographics]
+age_min = 18
+age_max = 100
+age_typical = 55
+sexes = ["female", "male"]
+
+[observations.sbp]
+label = "Systolic blood pressure"
+unit = "mmHg"
+loinc = "8480-6"
+min = 70
+max = 250
+step = 1
+typical = 125
+tolerance = 3
+
+[observations.dbp]
+label = "Diastolic blood pressure"
+unit = "mmHg"
+loinc = "8462-4"
+min = 40
+max = 150
+step = 1
+typical = 78
+tolerance = 3
+
+[observations.egfr]
+label = "Estimated glomerular filtration rate"
+unit = "mL/min/1.73m2"
+loinc = "62238-1"
+min = 5
+max = 130
+step = 1
+typical = 85
+tolerance = 4
+
+[observations.creatinine]
+label = "Serum creatinine"
+unit = "mg/dL"
+loinc = "2160-0"
+min = 0.2
+max = 12
+step = 0.01
+typical = 0.9
+tolerance = 0.05
+max_gap_hours = 336
+conversions = { "umol/L" = 0.0113122 }   # 1 umol/L = 0.0113122 mg/dL
+
+[observations.hba1c]
+label = "Haemoglobin A1c"
+unit = "%"
+loinc = "4548-4"
+min = 4
+max = 16
+step = 0.1
+typical = 5.6
+tolerance = 0.2
+
+[observations.ldl]
+label = "LDL cholesterol"
+unit = "mg/dL"
+loinc = "13457-7"
+min = 20
+max = 400
+step = 1
+typical = 110
+tolerance = 5
+conversions = { "mmol/L" = 38.67 }       # 1 mmol/L = 38.67 mg/dL
+
+[conditions.diabetes]
+label = "Diabetes mellitus"
+snomed = "73211009"
+
+[conditions.ckd]
+label = "Chronic kidney disease"
+snomed = "709044004"
+
+[conditions.ascvd]
+label = "Established atherosclerotic cardiovascular disease"
+
+[medications.metformin]
+label = "Metformin"
+rxnorm = "6809"
+
+[medications.nsaid]
+label = "NSAID (any)"
+
+# Plausibility: a diastolic pressure is below the systolic one.
+[[constraints]]
+name = "diastolic-below-systolic"
+rule = 'Latest("dbp") < Latest("sbp")'
