@@ -1,0 +1,10 @@
+{
+  "name": "lemma-official-check",
+  "private": true,
+  "type": "module",
+  "description": "Runs Lemma-exported CQL through the official HL7 CQL translator (@cqframework/cql) and the cql-execution engine.",
+  "dependencies": {
+    "@cqframework/cql": "5.4.0",
+    "cql-execution": "3.3.2"
+  }
+}
