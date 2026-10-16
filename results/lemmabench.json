@@ -1,0 +1,4001 @@
+{
+ "e1": {
+  "libraries": 207,
+  "patients_checked": 33450,
+  "evaluations": 122268,
+  "mismatches": 0,
+  "note": "SMT encoding vs the independent concrete interpreter on gold rules and mutants. Not a comparison with the official HL7 CQL engine."
+ },
+ "e2": {
+  "summary": {
+   "mutants": 201,
+   "non_equivalent": 186,
+   "proved_equivalent": 15,
+   "unknown": 0,
+   "detection": {
+    "Lemma (exact)": 186,
+    "boundary tests (from gold)": 94,
+    "fuzz: 200 uniform patients": 140,
+    "fuzz: 200 cohort patients": 128,
+    "fuzz: 2000 cohort patients": 177,
+    "any baseline": 181
+   },
+   "detection_rate": {
+    "Lemma (exact)": 1.0,
+    "boundary tests (from gold)": 0.5054,
+    "fuzz: 200 uniform patients": 0.7527,
+    "fuzz: 200 cohort patients": 0.6882,
+    "fuzz: 2000 cohort patients": 0.9516,
+    "any baseline": 0.9731
+   },
+   "false_alarms_on_equivalent": 0,
+   "lemma_seconds": {
+    "mean": 0.525,
+    "max": 6.167,
+    "total": 105.5
+   }
+  },
+  "by_operator": {
+   "connective": {
+    "non_equivalent": 23,
+    "equivalent": 0,
+    "boundary tests (from gold)": 15,
+    "fuzz: 200 uniform patients": 22,
+    "fuzz: 200 cohort patients": 22,
+    "fuzz: 2000 cohort patients": 23
+   },
+   "dropped-condition": {
+    "non_equivalent": 44,
+    "equivalent": 2,
+    "boundary tests (from gold)": 18,
+    "fuzz: 200 uniform patients": 42,
+    "fuzz: 200 cohort patients": 36,
+    "fuzz: 2000 cohort patients": 44
+   },
+   "boundary": {
+    "non_equivalent": 17,
+    "equivalent": 1,
+    "boundary tests (from gold)": 8,
+    "fuzz: 200 uniform patients": 6,
+    "fuzz: 200 cohort patients": 6,
+    "fuzz: 2000 cohort patients": 13
+   },
+   "direction": {
+    "non_equivalent": 18,
+    "equivalent": 0,
+    "boundary tests (from gold)": 12,
+    "fuzz: 200 uniform patients": 18,
+    "fuzz: 200 cohort patients": 18,
+    "fuzz: 2000 cohort patients": 18
+   },
+   "threshold": {
+    "non_equivalent": 70,
+    "equivalent": 2,
+    "boundary tests (from gold)": 31,
+    "fuzz: 200 uniform patients": 39,
+    "fuzz: 200 cohort patients": 33,
+    "fuzz: 2000 cohort patients": 65
+   },
+   "negated-flag": {
+    "non_equivalent": 10,
+    "equivalent": 0,
+    "boundary tests (from gold)": 7,
+    "fuzz: 200 uniform patients": 10,
+    "fuzz: 200 cohort patients": 10,
+    "fuzz: 2000 cohort patients": 10
+   },
+   "missing-as-normal": {
+    "non_equivalent": 2,
+    "equivalent": 10,
+    "boundary tests (from gold)": 1,
+    "fuzz: 200 uniform patients": 2,
+    "fuzz: 200 cohort patients": 1,
+    "fuzz: 2000 cohort patients": 2
+   },
+   "unit-mixup": {
+    "non_equivalent": 2,
+    "equivalent": 0,
+    "boundary tests (from gold)": 2,
+    "fuzz: 200 uniform patients": 1,
+    "fuzz: 200 cohort patients": 2,
+    "fuzz: 2000 cohort patients": 2
+   }
+  },
+  "methods": [
+   "boundary tests (from gold)",
+   "fuzz: 200 uniform patients",
+   "fuzz: 200 cohort patients",
+   "fuzz: 2000 cohort patients"
+  ],
+  "rows": [
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M001",
+    "operator": "connective",
+    "description": "\"and\" changed to \"or\" in \"Older without comorbidity\"",
+    "lemma": "different",
+    "lemma_seconds": 0.144,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M002",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Older without comorbidity\": AgeInYears() >= 60",
+    "lemma": "different",
+    "lemma_seconds": 0.127,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M003",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Older without comorbidity\": not (HasCondition(\"diabetes\") or HasCondition(\"ckd\"))",
+    "lemma": "different",
+    "lemma_seconds": 0.312,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M004",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Older without comorbidity\": AgeInYears() >= 60",
+    "lemma": "different",
+    "lemma_seconds": 0.049,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M005",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Older without comorbidity\": AgeInYears() >= 60",
+    "lemma": "different",
+    "lemma_seconds": 0.217,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M006",
+    "operator": "threshold",
+    "description": "threshold in \"Older without comorbidity\": 60 +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.085,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M007",
+    "operator": "threshold",
+    "description": "threshold in \"Older without comorbidity\": 60 -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.1,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M008",
+    "operator": "threshold",
+    "description": "threshold in \"Older without comorbidity\": 60 +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.117,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M009",
+    "operator": "threshold",
+    "description": "threshold in \"Older without comorbidity\": 60 -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.099,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M010",
+    "operator": "connective",
+    "description": "\"or\" changed to \"and\" in \"Older without comorbidity\"",
+    "lemma": "different",
+    "lemma_seconds": 0.286,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M011",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Older without comorbidity\": HasCondition(\"diabetes\")",
+    "lemma": "different",
+    "lemma_seconds": 0.125,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M012",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Older without comorbidity\": HasCondition(\"ckd\")",
+    "lemma": "different",
+    "lemma_seconds": 0.065,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M013",
+    "operator": "negated-flag",
+    "description": "HasCondition(\"diabetes\") negated in \"Older without comorbidity\"",
+    "lemma": "different",
+    "lemma_seconds": 0.113,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M014",
+    "operator": "negated-flag",
+    "description": "HasCondition(\"ckd\") negated in \"Older without comorbidity\"",
+    "lemma": "different",
+    "lemma_seconds": 0.265,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M015",
+    "operator": "connective",
+    "description": "\"or\" changed to \"and\" in \"Elevated for older adults\"",
+    "lemma": "different",
+    "lemma_seconds": 0.243,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M016",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Elevated for older adults\": Latest(\"sbp\") >= 150 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.353,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M017",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Elevated for older adults\": Latest(\"dbp\") >= 90 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.404,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M018",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Elevated for older adults\": Latest(\"sbp\") >= 150 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.077,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M019",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Elevated for older adults\": Latest(\"sbp\") >= 150 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.754,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M020",
+    "operator": "missing-as-normal",
+    "description": "missing \"sbp\" treated as typical value in \"Elevated for older adults\"",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.013,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M021",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated for older adults\": 150 'mmHg' +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.066,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M022",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated for older adults\": 150 'mmHg' -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.257,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M023",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated for older adults\": 150 'mmHg' +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.368,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M024",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated for older adults\": 150 'mmHg' -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.328,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M025",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Elevated for older adults\": Latest(\"dbp\") >= 90 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.061,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M026",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Elevated for older adults\": Latest(\"dbp\") >= 90 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.531,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M027",
+    "operator": "missing-as-normal",
+    "description": "missing \"dbp\" treated as typical value in \"Elevated for older adults\"",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.016,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M028",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated for older adults\": 90 'mmHg' +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.078,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M029",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated for older adults\": 90 'mmHg' -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.099,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M030",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated for older adults\": 90 'mmHg' +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.102,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M031",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated for older adults\": 90 'mmHg' -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.381,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M032",
+    "operator": "connective",
+    "description": "\"or\" changed to \"and\" in \"Elevated standard\"",
+    "lemma": "different",
+    "lemma_seconds": 0.189,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M033",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Elevated standard\": Latest(\"sbp\") >= 140 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.107,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M034",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Elevated standard\": Latest(\"dbp\") >= 90 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.156,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M035",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Elevated standard\": Latest(\"sbp\") >= 140 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.111,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M036",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Elevated standard\": Latest(\"sbp\") >= 140 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.529,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M037",
+    "operator": "missing-as-normal",
+    "description": "missing \"sbp\" treated as typical value in \"Elevated standard\"",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.013,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M038",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated standard\": 140 'mmHg' +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.129,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M039",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated standard\": 140 'mmHg' -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.082,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M040",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated standard\": 140 'mmHg' +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.068,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M041",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated standard\": 140 'mmHg' -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.237,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M042",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Elevated standard\": Latest(\"dbp\") >= 90 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.065,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M043",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Elevated standard\": Latest(\"dbp\") >= 90 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.237,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M044",
+    "operator": "missing-as-normal",
+    "description": "missing \"dbp\" treated as typical value in \"Elevated standard\"",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.012,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M045",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated standard\": 90 'mmHg' +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.098,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M046",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated standard\": 90 'mmHg' -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.106,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M047",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated standard\": 90 'mmHg' +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.154,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M048",
+    "operator": "threshold",
+    "description": "threshold in \"Elevated standard\": 90 'mmHg' -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.155,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M049",
+    "operator": "connective",
+    "description": "\"or\" changed to \"and\" in \"Start antihypertensive\"",
+    "lemma": "different",
+    "lemma_seconds": 0.417,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M050",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Start antihypertensive\": \"Older without comorbidity\" and \"Elevated for older adults\"",
+    "lemma": "different",
+    "lemma_seconds": 0.641,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M051",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Start antihypertensive\": not \"Older without comorbidity\" and \"Elevated standard\"",
+    "lemma": "different",
+    "lemma_seconds": 0.154,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M052",
+    "operator": "connective",
+    "description": "\"and\" changed to \"or\" in \"Start antihypertensive\"",
+    "lemma": "different",
+    "lemma_seconds": 0.05,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M053",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Start antihypertensive\": \"Older without comorbidity\"",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.014,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M054",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Start antihypertensive\": \"Elevated for older adults\"",
+    "lemma": "different",
+    "lemma_seconds": 0.111,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M055",
+    "operator": "connective",
+    "description": "\"and\" changed to \"or\" in \"Start antihypertensive\"",
+    "lemma": "different",
+    "lemma_seconds": 0.12,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M056",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Start antihypertensive\": not \"Older without comorbidity\"",
+    "lemma": "different",
+    "lemma_seconds": 0.101,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v1",
+    "id": "M057",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Start antihypertensive\": \"Elevated standard\"",
+    "lemma": "different",
+    "lemma_seconds": 0.096,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M001",
+    "operator": "connective",
+    "description": "\"or\" changed to \"and\" in \"High risk proxy\"",
+    "lemma": "different",
+    "lemma_seconds": 0.207,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M002",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"High risk proxy\": HasCondition(\"ascvd\") or HasCondition(\"diabetes\")",
+    "lemma": "different",
+    "lemma_seconds": 0.436,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M003",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"High risk proxy\": HasCondition(\"ckd\")",
+    "lemma": "different",
+    "lemma_seconds": 0.301,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M004",
+    "operator": "connective",
+    "description": "\"or\" changed to \"and\" in \"High risk proxy\"",
+    "lemma": "different",
+    "lemma_seconds": 0.162,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M005",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"High risk proxy\": HasCondition(\"ascvd\")",
+    "lemma": "different",
+    "lemma_seconds": 0.319,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M006",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"High risk proxy\": HasCondition(\"diabetes\")",
+    "lemma": "different",
+    "lemma_seconds": 0.416,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M007",
+    "operator": "negated-flag",
+    "description": "HasCondition(\"ascvd\") negated in \"High risk proxy\"",
+    "lemma": "different",
+    "lemma_seconds": 0.631,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M008",
+    "operator": "negated-flag",
+    "description": "HasCondition(\"diabetes\") negated in \"High risk proxy\"",
+    "lemma": "different",
+    "lemma_seconds": 0.415,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M009",
+    "operator": "negated-flag",
+    "description": "HasCondition(\"ckd\") negated in \"High risk proxy\"",
+    "lemma": "different",
+    "lemma_seconds": 0.455,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M010",
+    "operator": "connective",
+    "description": "\"or\" changed to \"and\" in \"Stage 1 or higher\"",
+    "lemma": "different",
+    "lemma_seconds": 0.666,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M011",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Stage 1 or higher\": Latest(\"sbp\") >= 130 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.395,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M012",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Stage 1 or higher\": Latest(\"dbp\") >= 80 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.127,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M013",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Stage 1 or higher\": Latest(\"sbp\") >= 130 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.273,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M014",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Stage 1 or higher\": Latest(\"sbp\") >= 130 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.742,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M015",
+    "operator": "missing-as-normal",
+    "description": "missing \"sbp\" treated as typical value in \"Stage 1 or higher\"",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.011,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M016",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 1 or higher\": 130 'mmHg' +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.146,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M017",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 1 or higher\": 130 'mmHg' -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.232,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M018",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 1 or higher\": 130 'mmHg' +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.383,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M019",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 1 or higher\": 130 'mmHg' -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.337,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M020",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Stage 1 or higher\": Latest(\"dbp\") >= 80 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.095,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M021",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Stage 1 or higher\": Latest(\"dbp\") >= 80 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.999,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M022",
+    "operator": "missing-as-normal",
+    "description": "missing \"dbp\" treated as typical value in \"Stage 1 or higher\"",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.011,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M023",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 1 or higher\": 80 'mmHg' +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.187,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M024",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 1 or higher\": 80 'mmHg' -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.149,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M025",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 1 or higher\": 80 'mmHg' +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.169,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M026",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 1 or higher\": 80 'mmHg' -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.336,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M027",
+    "operator": "connective",
+    "description": "\"or\" changed to \"and\" in \"Stage 2\"",
+    "lemma": "different",
+    "lemma_seconds": 0.131,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M028",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Stage 2\": Latest(\"sbp\") >= 140 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.332,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M029",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Stage 2\": Latest(\"dbp\") >= 90 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 1.375,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M030",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Stage 2\": Latest(\"sbp\") >= 140 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.237,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M031",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Stage 2\": Latest(\"sbp\") >= 140 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.814,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M032",
+    "operator": "missing-as-normal",
+    "description": "missing \"sbp\" treated as typical value in \"Stage 2\"",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.011,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M033",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 2\": 140 'mmHg' +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.124,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M034",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 2\": 140 'mmHg' -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.074,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M035",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 2\": 140 'mmHg' +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.608,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M036",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 2\": 140 'mmHg' -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.581,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M037",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Stage 2\": Latest(\"dbp\") >= 90 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 0.141,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M038",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Stage 2\": Latest(\"dbp\") >= 90 'mmHg'",
+    "lemma": "different",
+    "lemma_seconds": 1.998,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M039",
+    "operator": "missing-as-normal",
+    "description": "missing \"dbp\" treated as typical value in \"Stage 2\"",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.012,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M040",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 2\": 90 'mmHg' +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.149,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M041",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 2\": 90 'mmHg' -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.092,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M042",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 2\": 90 'mmHg' +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.255,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M043",
+    "operator": "threshold",
+    "description": "threshold in \"Stage 2\": 90 'mmHg' -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.402,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M044",
+    "operator": "connective",
+    "description": "\"or\" changed to \"and\" in \"Start antihypertensive\"",
+    "lemma": "different",
+    "lemma_seconds": 0.317,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M045",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Start antihypertensive\": \"High risk proxy\" and \"Stage 1 or higher\"",
+    "lemma": "different",
+    "lemma_seconds": 0.216,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M046",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Start antihypertensive\": \"Stage 2\"",
+    "lemma": "different",
+    "lemma_seconds": 0.87,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M047",
+    "operator": "connective",
+    "description": "\"and\" changed to \"or\" in \"Start antihypertensive\"",
+    "lemma": "different",
+    "lemma_seconds": 0.448,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M048",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Start antihypertensive\": \"High risk proxy\"",
+    "lemma": "different",
+    "lemma_seconds": 0.164,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "bp_initiation_v2",
+    "id": "M049",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Start antihypertensive\": \"Stage 1 or higher\"",
+    "lemma": "different",
+    "lemma_seconds": 0.135,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M001",
+    "operator": "connective",
+    "description": "\"and\" changed to \"or\" in \"Eligible\"",
+    "lemma": "different",
+    "lemma_seconds": 1.429,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M002",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Eligible\": HasCondition(\"diabetes\")",
+    "lemma": "different",
+    "lemma_seconds": 0.949,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M003",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Eligible\": not OnMedication(\"metformin\")",
+    "lemma": "different",
+    "lemma_seconds": 1.869,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M004",
+    "operator": "negated-flag",
+    "description": "HasCondition(\"diabetes\") negated in \"Eligible\"",
+    "lemma": "different",
+    "lemma_seconds": 2.736,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M005",
+    "operator": "negated-flag",
+    "description": "OnMedication(\"metformin\") negated in \"Eligible\"",
+    "lemma": "different",
+    "lemma_seconds": 3.451,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M006",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Glycaemic need\": Latest(\"hba1c\") >= 6.5 '%'",
+    "lemma": "different",
+    "lemma_seconds": 0.694,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M007",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Glycaemic need\": Latest(\"hba1c\") >= 6.5 '%'",
+    "lemma": "different",
+    "lemma_seconds": 2.754,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M008",
+    "operator": "missing-as-normal",
+    "description": "missing \"hba1c\" treated as typical value in \"Glycaemic need\"",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.009,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M009",
+    "operator": "threshold",
+    "description": "threshold in \"Glycaemic need\": 6.5 '%' +1 step",
+    "lemma": "different",
+    "lemma_seconds": 2.036,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M010",
+    "operator": "threshold",
+    "description": "threshold in \"Glycaemic need\": 6.5 '%' -1 step",
+    "lemma": "different",
+    "lemma_seconds": 1.56,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M011",
+    "operator": "threshold",
+    "description": "threshold in \"Glycaemic need\": 6.5 '%' +10%",
+    "lemma": "different",
+    "lemma_seconds": 1.78,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M012",
+    "operator": "threshold",
+    "description": "threshold in \"Glycaemic need\": 6.5 '%' -10%",
+    "lemma": "different",
+    "lemma_seconds": 2.375,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M013",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Renal function adequate\": Latest(\"egfr\") >= 45 'mL/min/1.73m2'",
+    "lemma": "different",
+    "lemma_seconds": 0.336,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M014",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Renal function adequate\": Latest(\"egfr\") >= 45 'mL/min/1.73m2'",
+    "lemma": "different",
+    "lemma_seconds": 3.656,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M015",
+    "operator": "missing-as-normal",
+    "description": "missing \"egfr\" treated as typical value in \"Renal function adequate\"",
+    "lemma": "different",
+    "lemma_seconds": 0.253,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M016",
+    "operator": "threshold",
+    "description": "threshold in \"Renal function adequate\": 45 'mL/min/1.73m2' +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.624,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M017",
+    "operator": "threshold",
+    "description": "threshold in \"Renal function adequate\": 45 'mL/min/1.73m2' -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.471,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M018",
+    "operator": "threshold",
+    "description": "threshold in \"Renal function adequate\": 45 'mL/min/1.73m2' +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.262,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M019",
+    "operator": "threshold",
+    "description": "threshold in \"Renal function adequate\": 45 'mL/min/1.73m2' -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.272,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M020",
+    "operator": "connective",
+    "description": "\"and\" changed to \"or\" in \"Recommend metformin\"",
+    "lemma": "different",
+    "lemma_seconds": 0.355,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M021",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Recommend metformin\": \"Eligible\" and \"Glycaemic need\"",
+    "lemma": "different",
+    "lemma_seconds": 1.591,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M022",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Recommend metformin\": \"Renal function adequate\"",
+    "lemma": "different",
+    "lemma_seconds": 0.367,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M023",
+    "operator": "connective",
+    "description": "\"and\" changed to \"or\" in \"Recommend metformin\"",
+    "lemma": "different",
+    "lemma_seconds": 2.2,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M024",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Recommend metformin\": \"Eligible\"",
+    "lemma": "different",
+    "lemma_seconds": 0.67,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "metformin",
+    "id": "M025",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Recommend metformin\": \"Glycaemic need\"",
+    "lemma": "different",
+    "lemma_seconds": 1.322,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M001",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Rise of 0.3 mg/dL within 48 hours\": Delta(\"creatinine\", 48 hours) >= 0.3 'mg/dL'",
+    "lemma": "different",
+    "lemma_seconds": 0.314,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M002",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Rise of 0.3 mg/dL within 48 hours\": Delta(\"creatinine\", 48 hours) >= 0.3 'mg/dL'",
+    "lemma": "different",
+    "lemma_seconds": 6.167,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M003",
+    "operator": "threshold",
+    "description": "threshold in \"Rise of 0.3 mg/dL within 48 hours\": 0.3 'mg/dL' +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.38,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M004",
+    "operator": "threshold",
+    "description": "threshold in \"Rise of 0.3 mg/dL within 48 hours\": 0.3 'mg/dL' -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.181,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M005",
+    "operator": "threshold",
+    "description": "threshold in \"Rise of 0.3 mg/dL within 48 hours\": 0.3 'mg/dL' +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.404,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M006",
+    "operator": "threshold",
+    "description": "threshold in \"Rise of 0.3 mg/dL within 48 hours\": 0.3 'mg/dL' -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.833,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M007",
+    "operator": "unit-mixup",
+    "description": "unit changed in \"Rise of 0.3 mg/dL within 48 hours\": 0.3 'mg/dL' -> 3/10 'umol/L'",
+    "lemma": "different",
+    "lemma_seconds": 1.505,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M008",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"1.5 times baseline within 7 days\": Ratio(\"creatinine\", 7 days) >= 1.5",
+    "lemma": "different",
+    "lemma_seconds": 0.999,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M009",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"1.5 times baseline within 7 days\": Ratio(\"creatinine\", 7 days) >= 1.5",
+    "lemma": "different",
+    "lemma_seconds": 2.675,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M010",
+    "operator": "threshold",
+    "description": "threshold in \"1.5 times baseline within 7 days\": 1.5 +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.794,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M011",
+    "operator": "threshold",
+    "description": "threshold in \"1.5 times baseline within 7 days\": 1.5 -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.3,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M012",
+    "operator": "threshold",
+    "description": "threshold in \"1.5 times baseline within 7 days\": 1.5 +10%",
+    "lemma": "different",
+    "lemma_seconds": 2.984,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M013",
+    "operator": "threshold",
+    "description": "threshold in \"1.5 times baseline within 7 days\": 1.5 -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.772,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M014",
+    "operator": "connective",
+    "description": "\"or\" changed to \"and\" in \"AKI alert\"",
+    "lemma": "different",
+    "lemma_seconds": 1.601,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M015",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"AKI alert\": \"Rise of 0.3 mg/dL within 48 hours\"",
+    "lemma": "different",
+    "lemma_seconds": 5.449,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "aki_alert",
+    "id": "M016",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"AKI alert\": \"1.5 times baseline within 7 days\"",
+    "lemma": "different",
+    "lemma_seconds": 0.164,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M001",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Very high LDL\": Latest(\"ldl\") >= 4.9 'mmol/L'",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.018,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M002",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Very high LDL\": Latest(\"ldl\") >= 4.9 'mmol/L'",
+    "lemma": "different",
+    "lemma_seconds": 0.555,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M003",
+    "operator": "missing-as-normal",
+    "description": "missing \"ldl\" treated as typical value in \"Very high LDL\"",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.01,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M004",
+    "operator": "threshold",
+    "description": "threshold in \"Very high LDL\": 4.9 'mmol/L' +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.292,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M005",
+    "operator": "threshold",
+    "description": "threshold in \"Very high LDL\": 4.9 'mmol/L' -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.483,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M006",
+    "operator": "threshold",
+    "description": "threshold in \"Very high LDL\": 4.9 'mmol/L' +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.432,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M007",
+    "operator": "threshold",
+    "description": "threshold in \"Very high LDL\": 4.9 'mmol/L' -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.55,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M008",
+    "operator": "unit-mixup",
+    "description": "unit changed in \"Very high LDL\": 4.9 'mmol/L' -> 49/10 'mg/dL'",
+    "lemma": "different",
+    "lemma_seconds": 0.28,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M009",
+    "operator": "connective",
+    "description": "\"and\" changed to \"or\" in \"Diabetes in age band\"",
+    "lemma": "different",
+    "lemma_seconds": 0.071,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M010",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Diabetes in age band\": HasCondition(\"diabetes\") and AgeInYears() >= 40",
+    "lemma": "different",
+    "lemma_seconds": 0.073,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M011",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Diabetes in age band\": AgeInYears() <= 75",
+    "lemma": "different",
+    "lemma_seconds": 0.069,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M012",
+    "operator": "connective",
+    "description": "\"and\" changed to \"or\" in \"Diabetes in age band\"",
+    "lemma": "different",
+    "lemma_seconds": 0.115,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M013",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Diabetes in age band\": HasCondition(\"diabetes\")",
+    "lemma": "different",
+    "lemma_seconds": 0.082,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M014",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Diabetes in age band\": AgeInYears() >= 40",
+    "lemma": "different",
+    "lemma_seconds": 0.062,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M015",
+    "operator": "negated-flag",
+    "description": "HasCondition(\"diabetes\") negated in \"Diabetes in age band\"",
+    "lemma": "different",
+    "lemma_seconds": 0.253,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M016",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Diabetes in age band\": AgeInYears() >= 40",
+    "lemma": "different",
+    "lemma_seconds": 0.035,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M017",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Diabetes in age band\": AgeInYears() >= 40",
+    "lemma": "different",
+    "lemma_seconds": 0.131,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M018",
+    "operator": "threshold",
+    "description": "threshold in \"Diabetes in age band\": 40 +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.026,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M019",
+    "operator": "threshold",
+    "description": "threshold in \"Diabetes in age band\": 40 -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.025,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M020",
+    "operator": "threshold",
+    "description": "threshold in \"Diabetes in age band\": 40 +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.029,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M021",
+    "operator": "threshold",
+    "description": "threshold in \"Diabetes in age band\": 40 -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.043,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M022",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Diabetes in age band\": AgeInYears() <= 75",
+    "lemma": "different",
+    "lemma_seconds": 0.042,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M023",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Diabetes in age band\": AgeInYears() <= 75",
+    "lemma": "different",
+    "lemma_seconds": 0.123,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M024",
+    "operator": "threshold",
+    "description": "threshold in \"Diabetes in age band\": 75 +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.022,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M025",
+    "operator": "threshold",
+    "description": "threshold in \"Diabetes in age band\": 75 -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.023,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M026",
+    "operator": "threshold",
+    "description": "threshold in \"Diabetes in age band\": 75 +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.028,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M027",
+    "operator": "threshold",
+    "description": "threshold in \"Diabetes in age band\": 75 -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.027,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M028",
+    "operator": "connective",
+    "description": "\"or\" changed to \"and\" in \"Recommend statin\"",
+    "lemma": "different",
+    "lemma_seconds": 0.316,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M029",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Recommend statin\": \"Very high LDL\" or \"Diabetes in age band\"",
+    "lemma": "different",
+    "lemma_seconds": 1.307,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M030",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Recommend statin\": HasCondition(\"ascvd\")",
+    "lemma": "different",
+    "lemma_seconds": 0.303,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M031",
+    "operator": "connective",
+    "description": "\"or\" changed to \"and\" in \"Recommend statin\"",
+    "lemma": "different",
+    "lemma_seconds": 0.369,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M032",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Recommend statin\": \"Very high LDL\"",
+    "lemma": "different",
+    "lemma_seconds": 1.369,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M033",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Recommend statin\": \"Diabetes in age band\"",
+    "lemma": "different",
+    "lemma_seconds": 0.05,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "statin",
+    "id": "M034",
+    "operator": "negated-flag",
+    "description": "HasCondition(\"ascvd\") negated in \"Recommend statin\"",
+    "lemma": "different",
+    "lemma_seconds": 0.531,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M001",
+    "operator": "connective",
+    "description": "\"and\" changed to \"or\" in \"Eligible adult\"",
+    "lemma": "different",
+    "lemma_seconds": 1.02,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M002",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Eligible adult\": AgeInYears() >= 18",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.015,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M003",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Eligible adult\": not HasCondition(\"ckd\")",
+    "lemma": "different",
+    "lemma_seconds": 0.995,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M004",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Eligible adult\": AgeInYears() >= 18",
+    "lemma": "different",
+    "lemma_seconds": 0.127,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M005",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Eligible adult\": AgeInYears() >= 18",
+    "lemma": "different",
+    "lemma_seconds": 0.613,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M006",
+    "operator": "threshold",
+    "description": "threshold in \"Eligible adult\": 18 +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.094,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M007",
+    "operator": "threshold",
+    "description": "threshold in \"Eligible adult\": 18 -1 step",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.012,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M008",
+    "operator": "threshold",
+    "description": "threshold in \"Eligible adult\": 18 +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.128,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M009",
+    "operator": "threshold",
+    "description": "threshold in \"Eligible adult\": 18 -10%",
+    "lemma": "equivalent",
+    "lemma_seconds": 0.017,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": false
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M010",
+    "operator": "negated-flag",
+    "description": "HasCondition(\"ckd\") negated in \"Eligible adult\"",
+    "lemma": "different",
+    "lemma_seconds": 1.987,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M011",
+    "operator": "boundary",
+    "description": "inclusive/exclusive flipped in \"Kidney function acceptable\": Latest(\"egfr\") >= 60 'mL/min/1.73m2'",
+    "lemma": "different",
+    "lemma_seconds": 0.077,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M012",
+    "operator": "direction",
+    "description": "comparison direction reversed in \"Kidney function acceptable\": Latest(\"egfr\") >= 60 'mL/min/1.73m2'",
+    "lemma": "different",
+    "lemma_seconds": 1.819,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M013",
+    "operator": "missing-as-normal",
+    "description": "missing \"egfr\" treated as typical value in \"Kidney function acceptable\"",
+    "lemma": "different",
+    "lemma_seconds": 0.21,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M014",
+    "operator": "threshold",
+    "description": "threshold in \"Kidney function acceptable\": 60 'mL/min/1.73m2' +1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.212,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M015",
+    "operator": "threshold",
+    "description": "threshold in \"Kidney function acceptable\": 60 'mL/min/1.73m2' -1 step",
+    "lemma": "different",
+    "lemma_seconds": 0.072,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": false,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M016",
+    "operator": "threshold",
+    "description": "threshold in \"Kidney function acceptable\": 60 'mL/min/1.73m2' +10%",
+    "lemma": "different",
+    "lemma_seconds": 0.161,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M017",
+    "operator": "threshold",
+    "description": "threshold in \"Kidney function acceptable\": 60 'mL/min/1.73m2' -10%",
+    "lemma": "different",
+    "lemma_seconds": 0.453,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M018",
+    "operator": "connective",
+    "description": "\"and\" changed to \"or\" in \"Recommend NSAID\"",
+    "lemma": "different",
+    "lemma_seconds": 0.156,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M019",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Recommend NSAID\": \"Eligible adult\"",
+    "lemma": "different",
+    "lemma_seconds": 0.872,
+    "detected_by": {
+     "boundary tests (from gold)": false,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": false,
+     "fuzz: 2000 cohort patients": true
+    }
+   },
+   {
+    "gold": "nsaid_analgesia",
+    "id": "M020",
+    "operator": "dropped-condition",
+    "description": "condition removed in \"Recommend NSAID\": \"Kidney function acceptable\"",
+    "lemma": "different",
+    "lemma_seconds": 0.267,
+    "detected_by": {
+     "boundary tests (from gold)": true,
+     "fuzz: 200 uniform patients": true,
+     "fuzz: 200 cohort patients": true,
+     "fuzz: 2000 cohort patients": true
+    }
+   }
+  ],
+  "wall_seconds": 225.2
+ },
+ "e3": {
+  "diff": {
+   "rule": "Start antihypertensive",
+   "status": "different",
+   "mode": "fires",
+   "gained": {
+    "direction": "gained",
+    "patient": {
+     "id": "gained",
+     "age": 60,
+     "sex": "female",
+     "observations": {
+      "sbp": {
+       "value": 140
+      }
+     },
+     "conditions": [],
+     "medications": []
+    },
+    "a": "null",
+    "b": "true",
+    "zone": {
+     "age": {
+      "min": 18,
+      "max": 100
+     },
+     "observations": {
+      "sbp": {
+       "presence": "sometimes",
+       "min": "81",
+       "max": "149",
+       "unit": "mmHg"
+      },
+      "dbp": {
+       "presence": "sometimes",
+       "min": "40",
+       "max": "89",
+       "unit": "mmHg"
+      },
+      "egfr": {
+       "presence": "sometimes",
+       "min": "5",
+       "max": "130",
+       "unit": "mL/min/1.73m2"
+      },
+      "creatinine": {
+       "presence": "sometimes",
+       "min": "0.2",
+       "max": "12",
+       "unit": "mg/dL"
+      },
+      "hba1c": {
+       "presence": "sometimes",
+       "min": "4",
+       "max": "16",
+       "unit": "%"
+      },
+      "ldl": {
+       "presence": "sometimes",
+       "min": "20",
+       "max": "400",
+       "unit": "mg/dL"
+      }
+     },
+     "flags": {
+      "diabetes": "sometimes",
+      "ckd": "sometimes",
+      "ascvd": "sometimes",
+      "metformin": "sometimes",
+      "nsaid": "sometimes"
+     }
+    }
+   },
+   "lost": null,
+   "transitions": {},
+   "unknown": [],
+   "syntactic_changes": [
+    {
+     "define": "Older without comorbidity",
+     "change": "removed",
+     "before": "AgeInYears() >= 60 and not (HasCondition(\"diabetes\") or HasCondition(\"ckd\"))",
+     "after": null
+    },
+    {
+     "define": "Elevated for older adults",
+     "change": "removed",
+     "before": "Latest(\"sbp\") >= 150 'mmHg' or Latest(\"dbp\") >= 90 'mmHg'",
+     "after": null
+    },
+    {
+     "define": "Elevated standard",
+     "change": "removed",
+     "before": "Latest(\"sbp\") >= 140 'mmHg' or Latest(\"dbp\") >= 90 'mmHg'",
+     "after": null
+    },
+    {
+     "define": "Start antihypertensive",
+     "change": "changed",
+     "before": "\"Older without comorbidity\" and \"Elevated for older adults\" or not \"Older without comorbidity\" and \"Elevated standard\"",
+     "after": "\"High risk proxy\" and \"Stage 1 or higher\" or \"Stage 2\""
+    },
+    {
+     "define": "High risk proxy",
+     "change": "added",
+     "before": null,
+     "after": "HasCondition(\"ascvd\") or HasCondition(\"diabetes\") or HasCondition(\"ckd\")"
+    },
+    {
+     "define": "Stage 1 or higher",
+     "change": "added",
+     "before": null,
+     "after": "Latest(\"sbp\") >= 130 'mmHg' or Latest(\"dbp\") >= 80 'mmHg'"
+    },
+    {
+     "define": "Stage 2",
+     "change": "added",
+     "before": null,
+     "after": "Latest(\"sbp\") >= 140 'mmHg' or Latest(\"dbp\") >= 90 'mmHg'"
+    }
+   ],
+   "seconds": 0.328,
+   "note": "Proofs hold for patients on the schema's measurement grid inside its plausible ranges, with at most one prior value per observation that a trend operator uses."
+  },
+  "boundary_tests_from_v1": 15,
+  "boundary_tests_failing_on_v2": 0,
+  "cohort": {
+   "n": 5000,
+   "synthetic": true
+  },
+  "impact": {
+   "a_fires": {
+    "k": 533,
+    "n": 5000,
+    "rate": 0.1066,
+    "ci_low": 0.0983,
+    "ci_high": 0.1155
+   },
+   "b_fires": {
+    "k": 926,
+    "n": 5000,
+    "rate": 0.1852,
+    "ci_low": 0.1747,
+    "ci_high": 0.1962
+   },
+   "gained": {
+    "k": 393,
+    "n": 5000,
+    "rate": 0.0786,
+    "ci_low": 0.0715,
+    "ci_high": 0.0864
+   },
+   "lost": {
+    "k": 0,
+    "n": 5000,
+    "rate": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0008
+   },
+   "changed": {
+    "k": 393,
+    "n": 5000,
+    "rate": 0.0786,
+    "ci_low": 0.0715,
+    "ci_high": 0.0864
+   }
+  }
+ },
+ "e8": {
+  "synthetic": true,
+  "groups": {
+   "sex": [
+    {
+     "group": "female",
+     "n": 2474,
+     "gained": 189,
+     "lost": 0,
+     "changed": {
+      "k": 189,
+      "n": 2474,
+      "rate": 0.0764,
+      "ci_low": 0.0666,
+      "ci_high": 0.0875
+     },
+     "a_fire_rate": 0.1063,
+     "b_fire_rate": 0.1827,
+     "changed_rate_minus_rest": {
+      "diff": -0.0044,
+      "ci_low": -0.0193,
+      "ci_high": 0.0106,
+      "significant": false
+     },
+     "small_group": false
+    },
+    {
+     "group": "male",
+     "n": 2526,
+     "gained": 204,
+     "lost": 0,
+     "changed": {
+      "k": 204,
+      "n": 2526,
+      "rate": 0.0808,
+      "ci_low": 0.0708,
+      "ci_high": 0.092
+     },
+     "a_fire_rate": 0.1069,
+     "b_fire_rate": 0.1876,
+     "changed_rate_minus_rest": {
+      "diff": 0.0044,
+      "ci_low": -0.0106,
+      "ci_high": 0.0193,
+      "significant": false
+     },
+     "small_group": false
+    }
+   ],
+   "age_band": [
+    {
+     "group": "18-39",
+     "n": 695,
+     "gained": 3,
+     "lost": 0,
+     "changed": {
+      "k": 3,
+      "n": 695,
+      "rate": 0.0043,
+      "ci_low": 0.0015,
+      "ci_high": 0.0126
+     },
+     "a_fire_rate": 0.0302,
+     "b_fire_rate": 0.0345,
+     "changed_rate_minus_rest": {
+      "diff": -0.0863,
+      "ci_low": -0.0957,
+      "ci_high": -0.0746,
+      "significant": true
+     },
+     "small_group": false
+    },
+    {
+     "group": "40-59",
+     "n": 2192,
+     "gained": 62,
+     "lost": 0,
+     "changed": {
+      "k": 62,
+      "n": 2192,
+      "rate": 0.0283,
+      "ci_low": 0.0221,
+      "ci_high": 0.0361
+     },
+     "a_fire_rate": 0.1026,
+     "b_fire_rate": 0.1309,
+     "changed_rate_minus_rest": {
+      "diff": -0.0896,
+      "ci_low": -0.1035,
+      "ci_high": -0.0758,
+      "significant": true
+     },
+     "small_group": false
+    },
+    {
+     "group": "60-74",
+     "n": 1461,
+     "gained": 193,
+     "lost": 0,
+     "changed": {
+      "k": 193,
+      "n": 1461,
+      "rate": 0.1321,
+      "ci_low": 0.1157,
+      "ci_high": 0.1504
+     },
+     "a_fire_rate": 0.1034,
+     "b_fire_rate": 0.2355,
+     "changed_rate_minus_rest": {
+      "diff": 0.0756,
+      "ci_low": 0.0573,
+      "ci_high": 0.0953,
+      "significant": true
+     },
+     "small_group": false
+    },
+    {
+     "group": "75+",
+     "n": 652,
+     "gained": 135,
+     "lost": 0,
+     "changed": {
+      "k": 135,
+      "n": 652,
+      "rate": 0.2071,
+      "ci_low": 0.1777,
+      "ci_high": 0.2398
+     },
+     "a_fire_rate": 0.2086,
+     "b_fire_rate": 0.4156,
+     "changed_rate_minus_rest": {
+      "diff": 0.1477,
+      "ci_low": 0.1175,
+      "ci_high": 0.1812,
+      "significant": true
+     },
+     "small_group": false
+    }
+   ]
+  },
+  "notes": [
+   "Descriptive audit of the cohort provided; not a causal or fairness claim.",
+   "Groups smaller than 30 are flagged: their intervals are wide and should not be over-read."
+  ]
+ },
+ "e7": {
+  "synthetic": true,
+  "tolerances": {
+   "sbp": {
+    "unit": "mmHg",
+    "tolerance": 3.0
+   },
+   "dbp": {
+    "unit": "mmHg",
+    "tolerance": 3.0
+   },
+   "egfr": {
+    "unit": "mL/min/1.73m2",
+    "tolerance": 4.0
+   },
+   "creatinine": {
+    "unit": "mg/dL",
+    "tolerance": 0.05
+   },
+   "hba1c": {
+    "unit": "%",
+    "tolerance": 0.2
+   },
+   "ldl": {
+    "unit": "mg/dL",
+    "tolerance": 5.0
+   }
+  },
+  "rules": {
+   "bp_initiation_v1": {
+    "rule": "Start antihypertensive",
+    "patients_evaluated": 150,
+    "currently_fire": 19,
+    "fragile": 15,
+    "fragile_share": 0.1,
+    "distance_buckets_in_tolerances": {
+     "<=0.5": 9,
+     "0.5-1": 6,
+     "1-2": 9,
+     "2-5": 48,
+     ">5": 78,
+     "never flips": 0
+    },
+    "most_common_driver_of_fragile_flips": {
+     "sbp": 15,
+     "dbp": 14
+    },
+    "reading": "A patient is fragile if measurement changes within the declared per-observation tolerance can flip the decision.",
+    "examples": [
+     {
+      "patient_id": "P00024",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 0.333,
+      "fragile": true,
+      "changes": {
+       "sbp": {
+        "from": 139.0,
+        "to": 140.0
+       },
+       "dbp": {
+        "from": 87.0,
+        "to": 88.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00029",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 0.333,
+      "fragile": true,
+      "changes": {
+       "sbp": {
+        "from": 140.0,
+        "to": 139.0
+       },
+       "dbp": {
+        "from": 77.0,
+        "to": 78.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00043",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 0.333,
+      "fragile": true,
+      "changes": {
+       "sbp": {
+        "from": 132.0,
+        "to": 131.0
+       },
+       "dbp": {
+        "from": 89.0,
+        "to": 90.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00059",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 0.333,
+      "fragile": true,
+      "changes": {
+       "sbp": {
+        "from": 140.0,
+        "to": 139.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00063",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 0.333,
+      "fragile": true,
+      "changes": {
+       "sbp": {
+        "from": 142.0,
+        "to": 143.0
+       },
+       "dbp": {
+        "from": 90.0,
+        "to": 89.0
+       }
+      }
+     }
+    ],
+    "seconds": 6.7
+   },
+   "bp_initiation_v2": {
+    "rule": "Start antihypertensive",
+    "patients_evaluated": 150,
+    "currently_fire": 27,
+    "fragile": 17,
+    "fragile_share": 0.1133,
+    "distance_buckets_in_tolerances": {
+     "<=0.5": 7,
+     "0.5-1": 10,
+     "1-2": 15,
+     "2-5": 48,
+     ">5": 70,
+     "never flips": 0
+    },
+    "most_common_driver_of_fragile_flips": {
+     "sbp": 16,
+     "dbp": 16
+    },
+    "reading": "A patient is fragile if measurement changes within the declared per-observation tolerance can flip the decision.",
+    "examples": [
+     {
+      "patient_id": "P00024",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 0.333,
+      "fragile": true,
+      "changes": {
+       "sbp": {
+        "from": 139.0,
+        "to": 140.0
+       },
+       "dbp": {
+        "from": 87.0,
+        "to": 86.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00029",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 0.333,
+      "fragile": true,
+      "changes": {
+       "sbp": {
+        "from": 140.0,
+        "to": 139.0
+       },
+       "dbp": {
+        "from": 77.0,
+        "to": 78.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00059",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 0.333,
+      "fragile": true,
+      "changes": {
+       "sbp": {
+        "from": 140.0,
+        "to": 139.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00069",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 0.333,
+      "fragile": true,
+      "changes": {
+       "sbp": {
+        "from": 130.0,
+        "to": 129.0
+       },
+       "dbp": {
+        "from": 74.0,
+        "to": 75.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00100",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 0.333,
+      "fragile": true,
+      "changes": {
+       "dbp": {
+        "from": 80.0,
+        "to": 79.0
+       }
+      }
+     }
+    ],
+    "seconds": 4.5
+   },
+   "metformin": {
+    "rule": "Recommend metformin",
+    "patients_evaluated": 150,
+    "currently_fire": 4,
+    "fragile": 0,
+    "fragile_share": 0.0,
+    "distance_buckets_in_tolerances": {
+     "<=0.5": 0,
+     "0.5-1": 0,
+     "1-2": 3,
+     "2-5": 2,
+     ">5": 1,
+     "never flips": 144
+    },
+    "most_common_driver_of_fragile_flips": {},
+    "reading": "A patient is fragile if measurement changes within the declared per-observation tolerance can flip the decision.",
+    "examples": [
+     {
+      "patient_id": "P00090",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 1.25,
+      "fragile": false,
+      "changes": {
+       "egfr": {
+        "from": 47.0,
+        "to": 42.0
+       },
+       "hba1c": {
+        "from": 8.7,
+        "to": 8.5
+       }
+      }
+     },
+     {
+      "patient_id": "P00046",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 1.5,
+      "fragile": false,
+      "changes": {
+       "egfr": {
+        "from": 39.0,
+        "to": 45.0
+       },
+       "hba1c": {
+        "from": 7.9,
+        "to": 7.6
+       }
+      }
+     },
+     {
+      "patient_id": "P00031",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 2.0,
+      "fragile": false,
+      "changes": {
+       "egfr": {
+        "from": 73.0,
+        "to": 65.0
+       },
+       "hba1c": {
+        "from": 6.8,
+        "to": 6.4
+       }
+      }
+     },
+     {
+      "patient_id": "P00011",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 2.75,
+      "fragile": false,
+      "changes": {
+       "egfr": {
+        "from": 80.0,
+        "to": 69.0
+       },
+       "hba1c": {
+        "from": 6.9,
+        "to": 6.4
+       }
+      }
+     },
+     {
+      "patient_id": "P00100",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 4.5,
+      "fragile": false,
+      "changes": {
+       "egfr": {
+        "from": 53.0,
+        "to": 70.0
+       },
+       "hba1c": {
+        "from": 5.6,
+        "to": 6.5
+       }
+      }
+     }
+    ],
+    "seconds": 1.0
+   },
+   "aki_alert": {
+    "rule": "AKI alert",
+    "patients_evaluated": 150,
+    "currently_fire": 4,
+    "fragile": 1,
+    "fragile_share": 0.0067,
+    "distance_buckets_in_tolerances": {
+     "<=0.5": 0,
+     "0.5-1": 1,
+     "1-2": 3,
+     "2-5": 35,
+     ">5": 8,
+     "never flips": 103
+    },
+    "most_common_driver_of_fragile_flips": {
+     "creatinine": 2
+    },
+    "reading": "A patient is fragile if measurement changes within the declared per-observation tolerance can flip the decision.",
+    "examples": [
+     {
+      "patient_id": "P00088",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 0.8,
+      "fragile": true,
+      "changes": {
+       "creatinine": {
+        "from": 1.3,
+        "to": 1.34
+       },
+       "creatinine:prior": {
+        "from": 0.92,
+        "to": 0.88
+       }
+      }
+     },
+     {
+      "patient_id": "P00116",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 1.4,
+      "fragile": false,
+      "changes": {
+       "creatinine": {
+        "from": 1.01,
+        "to": 1.08
+       },
+       "creatinine:prior": {
+        "from": 0.85,
+        "to": 0.78
+       }
+      }
+     },
+     {
+      "patient_id": "P00018",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 1.6,
+      "fragile": false,
+      "changes": {
+       "creatinine": {
+        "from": 0.96,
+        "to": 0.88
+       },
+       "creatinine:prior": {
+        "from": 0.51,
+        "to": 0.59
+       }
+      }
+     },
+     {
+      "patient_id": "P00136",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 2.0,
+      "fragile": false,
+      "changes": {
+       "creatinine": {
+        "from": 0.98,
+        "to": 1.08
+       },
+       "creatinine:prior": {
+        "from": 0.81,
+        "to": 0.71
+       }
+      }
+     },
+     {
+      "patient_id": "P00129",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 2.2,
+      "fragile": false,
+      "changes": {
+       "creatinine": {
+        "from": 0.97,
+        "to": 1.07
+       },
+       "creatinine:prior": {
+        "from": 0.88,
+        "to": 0.77
+       }
+      }
+     }
+    ],
+    "seconds": 0.7
+   },
+   "statin": {
+    "rule": "Recommend statin",
+    "patients_evaluated": 150,
+    "currently_fire": 16,
+    "fragile": 0,
+    "fragile_share": 0.0,
+    "distance_buckets_in_tolerances": {
+     "<=0.5": 0,
+     "0.5-1": 0,
+     "1-2": 2,
+     "2-5": 9,
+     ">5": 84,
+     "never flips": 55
+    },
+    "most_common_driver_of_fragile_flips": {},
+    "reading": "A patient is fragile if measurement changes within the declared per-observation tolerance can flip the decision.",
+    "examples": [
+     {
+      "patient_id": "P00017",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 1.4,
+      "fragile": false,
+      "changes": {
+       "ldl": {
+        "from": 183.0,
+        "to": 190.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00098",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 1.4,
+      "fragile": false,
+      "changes": {
+       "ldl": {
+        "from": 193.0,
+        "to": 186.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00075",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 2.6,
+      "fragile": false,
+      "changes": {
+       "ldl": {
+        "from": 177.0,
+        "to": 190.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00090",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 2.6,
+      "fragile": false,
+      "changes": {
+       "ldl": {
+        "from": 177.0,
+        "to": 190.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00096",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 2.8,
+      "fragile": false,
+      "changes": {
+       "ldl": {
+        "from": 176.0,
+        "to": 190.0
+       }
+      }
+     }
+    ],
+    "seconds": 0.7
+   },
+   "nsaid_analgesia": {
+    "rule": "Recommend NSAID",
+    "patients_evaluated": 150,
+    "currently_fire": 119,
+    "fragile": 11,
+    "fragile_share": 0.0733,
+    "distance_buckets_in_tolerances": {
+     "<=0.5": 3,
+     "0.5-1": 8,
+     "1-2": 11,
+     "2-5": 38,
+     ">5": 74,
+     "never flips": 16
+    },
+    "most_common_driver_of_fragile_flips": {
+     "egfr": 11
+    },
+    "reading": "A patient is fragile if measurement changes within the declared per-observation tolerance can flip the decision.",
+    "examples": [
+     {
+      "patient_id": "P00034",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 0.25,
+      "fragile": true,
+      "changes": {
+       "egfr": {
+        "from": 60.0,
+        "to": 59.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00040",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 0.25,
+      "fragile": true,
+      "changes": {
+       "egfr": {
+        "from": 59.0,
+        "to": 60.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00131",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 0.25,
+      "fragile": true,
+      "changes": {
+       "egfr": {
+        "from": 59.0,
+        "to": 60.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00020",
+      "currently_fires": true,
+      "flip_distance_in_tolerances": 0.75,
+      "fragile": true,
+      "changes": {
+       "egfr": {
+        "from": 62.0,
+        "to": 59.0
+       }
+      }
+     },
+     {
+      "patient_id": "P00030",
+      "currently_fires": false,
+      "flip_distance_in_tolerances": 0.75,
+      "fragile": true,
+      "changes": {
+       "egfr": {
+        "from": 57.0,
+        "to": 60.0
+       }
+      }
+     }
+    ],
+    "seconds": 10.9
+   }
+  }
+ },
+ "e10": {
+  "available": true,
+  "libraries": 207,
+  "translated": 207,
+  "evaluations": 235518,
+  "mismatches": 26,
+  "translation_failures": [],
+  "mismatch_examples": [
+   {
+    "library": "aki_alert",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.2(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.2,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M003",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.21(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.21,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M004",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.19(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.19,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M005",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.23(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.23,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M006",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.17(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.17,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M008",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.2(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.2,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M009",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.2(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.2,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   },
+   {
+    "library": "aki_alert/M010",
+    "define": "Rise of 0.3 mg/dL within 48 hours",
+    "lemma": "true",
+    "official": "false",
+    "patient": {
+     "id": "creatinine=1.2(prior 0.9)",
+     "age": 55,
+     "sex": "female",
+     "observations": {
+      "creatinine": {
+       "value": 1.2,
+       "prior": 0.9,
+       "gap_hours": 48
+      }
+     },
+     "conditions": [],
+     "medications": []
+    }
+   }
+  ],
+  "translator": "@cqframework/cql 5.4.0",
+  "engine": "cql-execution 3.3.2"
+ }
+}
