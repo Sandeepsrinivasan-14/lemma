@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lemma</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<a class="skip" href="#plot-section">Skip to the zone plot</a>
+<header class="top">
+  <div class="brand">
+    <h1>Lemma</h1>
+    <p>See who a rule change affects, before it ships.</p>
+  </div>
+  <div class="controls">
+    <label>Example
+      <select id="example"></select>
+    </label>
+    <label>Rule
+      <select id="rule"></select>
+    </label>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-live="polite">
+    <div id="verdict" class="verdict" data-state="idle"><strong>Pick two versions to compare.</strong></div>
+  </section>
+
+  <section class="result">
+    
+    <div class="stage" id="plot-section">
+      <div class="plot-col">
+        <div class="axes">
+          <label>Horizontal <select id="axis-x"></select></label>
+          <label>Vertical <select id="axis-y"></select></label>
+        </div>
+        <div class="plot-wrap">
+          <canvas id="plot" width="640" height="520" role="img" aria-label="Zone plot: which patients are treated differently by the two versions"></canvas>
+          <div id="tip" class="tip" hidden></div>
+        </div>
+        <ul class="legend" id="legend"></ul>
+      </div>
+
+      <aside class="side">
+        <div class="panel" id="sliders-panel">
+          <h3>What if the new version used…</h3>
+          <p class="hint">Drag a threshold. The new version's text and the plot update.</p>
+          <div id="sliders"></div>
+          <button type="button" id="reset" class="quiet">Restore the new version's thresholds</button>
+        </div>
+        <details class="panel fold">
+          <summary><h3>Patient on the plot</h3></summary>
+          <p class="hint">Everything not on the plot's axes is fixed here. Click the plot to read the result at a point.</p>
+          <div class="ctx" id="ctx"></div>
+        </details>
+      </aside>
+    </div>
+
+    <div class="witnesses" id="witnesses"></div>
+  </section>
+
+  <section class="versions" aria-labelledby="versions-h">
+    <h2 class="sec" id="versions-h">The two versions</h2>
+    <p class="sec-note">Edit either one; everything above updates. Changing a threshold in the new version is the same as using its slider.</p>
+    <div class="editors">
+    <div class="editor">
+      <div class="editor-head"><h2 id="h-old">Old version</h2><span class="status" id="st-old"></span></div>
+      <textarea id="src-old" spellcheck="false" aria-labelledby="h-old"></textarea>
+      <ul class="diags" id="diag-old" aria-live="polite"></ul>
+    </div>
+    <div class="editor">
+      <div class="editor-head"><h2 id="h-new">New version</h2><span class="status" id="st-new"></span></div>
+      <textarea id="src-new" spellcheck="false" aria-labelledby="h-new"></textarea>
+      <ul class="diags" id="diag-new" aria-live="polite"></ul>
+    </div>
+    </div>
+  </section>
+
+  <section class="more" aria-label="More analyses">
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="impact">Who is affected</button>
+      <button role="tab" aria-selected="false" data-tab="verify">Safety rules</button>
+      <button role="tab" aria-selected="false" data-tab="missing">Missing data</button>
+      <button role="tab" aria-selected="false" data-tab="robust">Fragile decisions</button>
+    </div>
+    <div class="tabpanel" id="tab-impact" role="tabpanel"></div>
+    <div class="tabpanel" id="tab-verify" role="tabpanel" hidden></div>
+    <div class="tabpanel" id="tab-missing" role="tabpanel" hidden></div>
+    <div class="tabpanel" id="tab-robust" role="tabpanel" hidden></div>
+  </section>
+</main>
+
+<footer>
+  <p>Results are exact for patients on the schema's measurement grid and plausible ranges. Cohort figures use a <strong>synthetic</strong> population and describe the generator, not real patients. Example rules are illustrations, not clinical guidance.</p>
+</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>
