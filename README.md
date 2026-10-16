@@ -1,5 +1,7 @@
 # Lemma
 
+[![ci](https://github.com/Sandeepsrinivasan-14/lemma/actions/workflows/ci.yml/badge.svg)](https://github.com/Sandeepsrinivasan-14/lemma/actions/workflows/ci.yml)
+
 **Verify and diff clinical decision logic.** Lemma takes rules written in a small CQL-like language and answers, with proof rather than sampling:
 
 - *What changed?* Given two versions of a rule, is there a patient they treat differently? Lemma returns the smallest such patient (a "witness"), or proves there is none.
@@ -42,6 +44,8 @@ The old version was *undecided* for this patient (diastolic pressure missing) wh
 3. **Encoding.** Rules are compiled to Z3. Observations live on the schema's measurement grid, with at most one prior value per trend observation. Booleans are (true, false) pairs, numbers are (null, value).
 4. **Witnesses are replayed.** Every counterexample from the solver is re-evaluated by the independent interpreter; a disagreement raises `EncodingMismatch` instead of reporting a wrong answer.
 5. **Minimal witnesses.** `z3.Optimize` minimises how many facts a witness needs, then its distance from a typical patient, so examples are small and plausible. They export as FHIR R4 bundles.
+
+Details of the encoding and its guarantees: [docs/METHOD.md](docs/METHOD.md).
 
 ## LemmaBench (results in `results/RESULTS.md`)
 
