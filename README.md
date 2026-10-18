@@ -14,6 +14,10 @@ It runs as a CLI (usable as a CI gate), a Python library, and a local web UI wit
 
 ![Lemma UI](docs/ui.png)
 
+Dragging a threshold slider rewrites the new version and redraws who is affected:
+
+![Lemma demo](docs/demo.gif)
+
 ## Quick start
 
 ```bash
@@ -45,7 +49,7 @@ The old version was *undecided* for this patient (diastolic pressure missing) wh
 4. **Witnesses are replayed.** Every counterexample from the solver is re-evaluated by the independent interpreter; a disagreement raises `EncodingMismatch` instead of reporting a wrong answer.
 5. **Minimal witnesses.** `z3.Optimize` minimises how many facts a witness needs, then its distance from a typical patient, so examples are small and plausible. They export as FHIR R4 bundles.
 
-Details of the encoding and its guarantees: [docs/METHOD.md](docs/METHOD.md).
+Details of the encoding and its guarantees: [docs/METHOD.md](docs/METHOD.md). A worked example on a guideline revision: [docs/CASE_STUDY.md](docs/CASE_STUDY.md).
 
 ## LemmaBench (results in `results/RESULTS.md`)
 
